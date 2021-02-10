@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.movecatalog.cerattiandre.model.Movie;
 
 @Repository
-public interface MovieThumbRepository extends JpaRepository<Movie, String>{
+public interface MovieRepository extends JpaRepository<Movie, String>{
 
 }
