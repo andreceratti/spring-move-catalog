@@ -11,27 +11,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.movecatalog.cerattiandre.model.MovieThumb;
+import com.movecatalog.cerattiandre.model.Movie;
 import com.movecatalog.cerattiandre.repository.MovieThumbRepository;
 
 @RestController
 @RequestMapping("/movie")
-public class MovieThumbController {
+public class MovieController {
 	
 	@Autowired
 	private MovieThumbRepository movieThumbRepository;
 	
 	@GetMapping
-	public Optional<MovieThumb> find(@RequestBody MovieThumb request) {
-		String id = request.getSlug();
-		Optional<MovieThumb> movieThumb = movieThumbRepository.findById(id);
+	public Optional<Movie> find(@RequestBody Movie request) {
+		String id = request.getId();
+		Optional<Movie> movieThumb = movieThumbRepository.findById(id);
 		return movieThumb;
 	}
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public MovieThumb save(@RequestBody MovieThumb movieThumb) {
-		return movieThumbRepository.save(movieThumb);
+	public Movie save(@RequestBody Movie request) {
+		System.out.println(request.getCast());
+		return movieThumbRepository.save(request);
 	}
 
 }

@@ -3,9 +3,9 @@ package com.movecatalog.cerattiandre.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.movecatalog.cerattiandre.model.MovieThumb;
+import com.movecatalog.cerattiandre.model.Movie;
 
 @Repository
-public interface MovieThumbRepository extends JpaRepository<MovieThumb, String>{
+public interface MovieThumbRepository extends JpaRepository<Movie, String>{
 
 }
