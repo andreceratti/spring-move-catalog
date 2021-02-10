@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.movecatalog.cerattiandre.model.Genre;
 import com.movecatalog.cerattiandre.model.Movie;
+import com.movecatalog.cerattiandre.repository.GenresRepository;
 import com.movecatalog.cerattiandre.repository.MovieRepository;
 
 @RestController
@@ -21,6 +23,9 @@ public class MovieController {
 	
 	@Autowired
 	private MovieRepository movieRepository;
+	
+	@Autowired
+	private GenresRepository genresRepository;
 	
 	@GetMapping
 	public Optional<Movie> find(@RequestBody Movie request) {
@@ -32,7 +37,13 @@ public class MovieController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Movie save(@RequestBody Movie request) {
-		System.out.println(request.getCast());
+		for (String genre: request.getGenres()) {
+			if (genresRepository.findByName(genre) == null) {
+				Genre newGenre = new Genre();
+				newGenre.setName(genre);
+				genresRepository.save(newGenre);
+			}
+		}
 		return movieRepository.save(request);
 	}
 	
