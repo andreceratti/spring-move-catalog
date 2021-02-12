@@ -37,14 +37,15 @@ public class MovieController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Movie save(@RequestBody Movie request) {
-		for (String genre: request.getGenres()) {
-			if (genresRepository.findByName(genre) == null) {
-				Genre newGenre = new Genre();
-				newGenre.setName(genre);
-				genresRepository.save(newGenre);
-			}
-		}
-		return movieRepository.save(request);
+//		for (String genre: request.getGenres()) {
+//			if (genresRepository.findByName(genre) == null) {
+//				Genre newGenre = new Genre();
+//				newGenre.setName(genre);
+//				genresRepository.save(newGenre);
+//			}
+//		}
+		Movie movie = request;
+		return movieRepository.save(movie);
 	}
 	
 	@DeleteMapping

@@ -1,5 +1,6 @@
 package com.movecatalog.cerattiandre.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -16,10 +17,9 @@ import org.hibernate.annotations.GenericGenerator;
 
 import lombok.Data;
 
-@Data
 @Entity
 @Table(name = "movie")
-public class Movie {
+public class Movie  implements Serializable {
 	
 	@Column(nullable = true)
 	String backdrop;
@@ -71,4 +71,110 @@ public class Movie {
 	
 	@Column(nullable = false)
 	String title;
+
+	public String getBackdrop() {
+		return backdrop;
+	}
+
+	public void setBackdrop(String backdrop) {
+		this.backdrop = backdrop;
+	}
+
+	public List<Cast> getCast() {
+		return cast;
+	}
+
+	public void setCast(List<Cast> cast) {
+		this.cast = cast;
+	}
+
+	public String getClassification() {
+		return classification;
+	}
+
+	public void setClassification(String classification) {
+		this.classification = classification;
+	}
+
+	public String getDirector() {
+		return director;
+	}
+
+	public void setDirector(String director) {
+		this.director = director;
+	}
+
+	public List<Genre> getGenres() {
+		return genres;
+	}
+
+	public void setGenres(List<Genre> genres) {
+		this.genres = genres;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public float getImdb_rating() {
+		return imdb_rating;
+	}
+
+	public void setImdb_rating(float imdb_rating) {
+		this.imdb_rating = imdb_rating;
+	}
+
+	public String getLength() {
+		return length;
+	}
+
+	public void setLength(String length) {
+		this.length = length;
+	}
+
+	public String getOverview() {
+		return overview;
+	}
+
+	public void setOverview(String overview) {
+		this.overview = overview;
+	}
+
+	public Date getReleased_on() {
+		return released_on;
+	}
+
+	public void setReleased_on(Date released_on) {
+		this.released_on = released_on;
+	}
+
+	public String getSlug() {
+		return slug;
+	}
+
+	public void setSlug(String slug) {
+		this.slug = slug;
+	}
+
+	public String getPoster() {
+		return poster;
+	}
+
+	public void setPoster(String poster) {
+		this.poster = poster;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	
+	
 }

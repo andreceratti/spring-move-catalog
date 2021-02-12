@@ -26,11 +26,11 @@ public class SearchByGenreController {
 	@Autowired
 	private MovieRepository movieRepository;
 	
-	@GetMapping
-	public List<Movie> list(@RequestParam(name = "genre") String request) {
-		Genre genre = genreRepository.findByName(request);
-		return movieRepository.listByGenre(genre.getName());
-
-	}
+//	@GetMapping
+//	public List<Movie> list(@RequestParam(name = "genre") String request) {
+//		Genre genre = genreRepository.findByName(request);
+//		return movieRepository.listByGenre(genre.getName());
+//
+//	}
 
 }
