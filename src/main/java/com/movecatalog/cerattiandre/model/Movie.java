@@ -1,11 +1,16 @@
 package com.movecatalog.cerattiandre.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.JoinColumn;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -13,40 +18,57 @@ import lombok.Data;
 
 @Data
 @Entity
+@Table(name = "movie")
 public class Movie {
 	
 	@Column(nullable = true)
 	String backdrop;
-	@Column(nullable = false)
-	String[] cast;
+	
+	@ManyToMany
+	@JoinTable(name = "movie_cast", joinColumns = {@JoinColumn(name = "movie_id")},
+		inverseJoinColumns = {@JoinColumn(name = "cast_id")})
+	List<Cast> cast;
+	
 	@Column(nullable = false)
 	String classification;
+	
 	@Column(nullable = false)
 	String director;
+	
+	@ManyToMany
+	@JoinTable(name = "movie_genre", joinColumns = {@JoinColumn(name = "movie_id")},
+		inverseJoinColumns = {@JoinColumn(name = "genre_id")})
 	@Column(nullable = false)
-	String[] genres;
+	List<Genre> genres;
+	
 	@Id
 	@GeneratedValue(generator = "UUID")
 	@GenericGenerator(
 			name = "UUID",
 			strategy = "org.hibernate.id.UUIDGenerator"
 			)
+	
 	@Column(nullable = false)
 	String id;
+	
 	@Column(nullable = false)
 	float imdb_rating;
+	
 	@Column(nullable = false)
 	String length;
+	
 	@Column(nullable = false)
 	String overview;
+	
 	@Column(nullable = false)
 	Date released_on;
-	@Column(nullable = false)
-	String slug; // External ID key;
-	@Column(nullable = false)
-	String poster; // Poster URL
-	@Column(nullable = false)
-	String title; // Movie's title
 	
-		
+	@Column(nullable = false)
+	String slug;
+	
+	@Column(nullable = false)
+	String poster;
+	
+	@Column(nullable = false)
+	String title;
 }

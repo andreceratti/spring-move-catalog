@@ -1,9 +1,12 @@
 package com.movecatalog.cerattiandre.model;
 
-import javax.persistence.Column;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -11,6 +14,7 @@ import lombok.Data;
 
 @Data
 @Entity
+@Table(name = "genre")
 public class Genre {
 	
 	@Id
@@ -20,7 +24,8 @@ public class Genre {
 			strategy = "org.hibernate.id.UUIDGenerator"
 			)
 	String id;
-	@Column(nullable = false)
-	String name;
+	
+	@ManyToMany(mappedBy = "genres")
+	List<Movie> name;
 
 }
