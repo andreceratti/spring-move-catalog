@@ -6,5 +6,5 @@ import com.movecatalog.cerattiandre.model.Genre;
 
 public interface GenresRepository extends JpaRepository<Genre, String> {
 	
-	Genre findByName(String name);
+	Genre findByGenre(String genre);
 }

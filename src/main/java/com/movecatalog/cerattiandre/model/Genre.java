@@ -1,8 +1,8 @@
 package com.movecatalog.cerattiandre.model;
 
-import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,13 +11,14 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "genre")
-public class Genre implements Serializable {
-	
-	private static final long serialVersionUID = -2713564151631990491L;
+public class Genre{
 	
 	@Id
 	@GeneratedValue(generator = "UUID")
@@ -25,26 +26,18 @@ public class Genre implements Serializable {
 			name = "UUID",
 			strategy = "org.hibernate.id.UUIDGenerator"
 			)
+	@JsonManagedReference(value = "genreReference")
 	String id;
 	
+	@Column
+	String genre;
+	
 	@ManyToMany(mappedBy = "genres")
-	List<Movie> name;
-
-	public String getId() {
-		return id;
+	List<Movie> movies;
+	
+	public Genre() {
+		
 	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public List<Movie> getName() {
-		return name;
-	}
-
-	public void setName(List<Movie> name) {
-		this.name = name;
-	}
-
+	
 	
 }
