@@ -1,6 +1,7 @@
 package com.movecatalog.cerattiandre.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,13 +20,25 @@ public class GenresController {
 	@Autowired
 	private GenresRepository genreRepository;
 	
-	@GetMapping
+	@GetMapping("/all")
 	public List<Genre> list() {
 		return genreRepository.findAll();
+	}
+	
+	@GetMapping
+	public Optional<Genre> find(@RequestBody Genre request){
+		Optional<Genre> genre = genreRepository.findById(request.getId());
+		if (genre.isEmpty()) {
+			throw new RuntimeException("ID not found");
+		}
+		return genre;
 	}
 	
 	@PostMapping
 	public Genre save(@RequestBody Genre request) {
 		return genreRepository.save(request);
 	}
+	
+	
+	
 }
