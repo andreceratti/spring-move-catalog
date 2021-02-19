@@ -14,4 +14,5 @@ public interface MovieRepository extends JpaRepository<Movie, String>{
 	
 	@Query("FROM Movie WHERE genres LIKE %:name%")
 	List<Movie> listByGenre(@Param("name") String genre);
+	
 }

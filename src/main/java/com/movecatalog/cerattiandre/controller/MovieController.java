@@ -1,11 +1,13 @@
 package com.movecatalog.cerattiandre.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,8 +26,12 @@ public class MovieController {
 	
 	@GetMapping
 	public Optional<Movie> find(@RequestBody Movie request) {
-		System.out.println("AAAA");
-		return movieRepository.findById(request.getId());
+		String id = request.getId();
+		Optional<Movie> movie = movieRepository.findById(id);
+		if (movie.isEmpty()) {
+			throw new RuntimeException("Movie ID not found");
+		}
+		return movie;
 	}
 	
 	@PostMapping
@@ -35,11 +41,33 @@ public class MovieController {
 		return movieRepository.save(movie);
 	}
 	
-	@DeleteMapping
+	@DeleteMapping("/del")
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	public void delete(@RequestBody Movie request) {
 		String id = request.getId();
+		Optional<Movie> movie = movieRepository.findById(id);
+		System.out.println(movie);
+		if (movie.isEmpty() ) {
+			throw new RuntimeException("Movie ID not found");
+		}
 		movieRepository.deleteById(id);
 	}
+	
+	@GetMapping("/all")
+	public List<Movie> list() {
+		return movieRepository.findAll();
+	}
+	
+	@PatchMapping
+	public Movie alter(@RequestBody Movie request) {
+		Optional<Movie> movie = movieRepository.findById(request.getId());
+		if (movie.isEmpty()) {
+			throw new RuntimeException("Movie ID not found");
+		}
+		return movieRepository.save(request);
+		
+	}
+	
+	
 
 }

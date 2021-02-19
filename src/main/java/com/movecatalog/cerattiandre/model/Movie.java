@@ -32,7 +32,7 @@ public class Movie {
 	@ManyToMany(cascade=CascadeType.PERSIST)
 	@JoinTable(name = "movie_cast", joinColumns = {@JoinColumn(name = "movie_id")},
 		inverseJoinColumns = {@JoinColumn(name = "cast_id")})
-	@JsonBackReference(value = "castReference")
+	@JsonBackReference()
 	List<Cast> cast;
 	
 	@Column(nullable = false)

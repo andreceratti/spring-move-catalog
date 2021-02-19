@@ -11,8 +11,6 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import lombok.Data;
 
 @Data
@@ -26,7 +24,6 @@ public class Genre{
 			name = "UUID",
 			strategy = "org.hibernate.id.UUIDGenerator"
 			)
-	@JsonManagedReference(value = "genreReference")
 	String id;
 	
 	@Column
