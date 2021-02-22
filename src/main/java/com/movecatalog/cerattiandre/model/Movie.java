@@ -3,7 +3,6 @@ package com.movecatalog.cerattiandre.model;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,7 +28,7 @@ public class Movie {
 	@Column(nullable = true)
 	String backdrop;
 	
-	@ManyToMany(cascade=CascadeType.PERSIST)
+	@ManyToMany()
 	@JoinTable(name = "movie_cast", joinColumns = {@JoinColumn(name = "movie_id")},
 		inverseJoinColumns = {@JoinColumn(name = "cast_id")})
 	@JsonBackReference()
@@ -41,7 +40,7 @@ public class Movie {
 	@Column(nullable = false)
 	String director;
 	
-	@ManyToMany(cascade=CascadeType.PERSIST)
+	@ManyToMany()
 	@JoinTable(name = "movie_genre", joinColumns = {@JoinColumn(name = "movie_id")},
 		inverseJoinColumns = {@JoinColumn(name = "genre_id")})
 	@Column(nullable = false)
@@ -70,7 +69,7 @@ public class Movie {
 	@Column(nullable = false)
 	Date released_on;
 	
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	String slug;
 	
 	@Column(nullable = false)
